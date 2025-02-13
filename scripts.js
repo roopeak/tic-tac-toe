@@ -33,13 +33,19 @@ function generateGameBoard() {
 			
 			if (playerTurn === 'player1') {
 				containerItem.textContent = player1.symbol;
-				playerTurn = 'player2'
+				gameBoard[i] = player1.symbol;
+				playerTurn = 'player2';
+				console.log(gameBoard);
 			} else {
 				containerItem.textContent = player2.symbol;
+				gameBoard[i] = player2.symbol;
 				playerTurn = 'player1';
+				console.log(gameBoard);
 			}
 		})
 	}
+
+
 }
 
 generateGameBoard();
