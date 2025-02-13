@@ -16,7 +16,7 @@ const player2 = {
 	symbol: 'O'
 };
 
-let playerTurn = 'player1';
+let playerTurn = player1.name;
 
 function generateGameBoard() {
 	gameContainer.innerHTML = '';
@@ -42,10 +42,33 @@ function generateGameBoard() {
 				playerTurn = 'player1';
 				console.log(gameBoard);
 			}
+
+			checkWinner();
+			
 		})
 	}
+}
 
+function checkWinner() {
+	const winningConditions = [
+		[0,1,2],
+		[3,4,5],
+		[6,7,8],
+		[0,3,6],
+		[1,4,7],
+		[2,5,8],
+		[0,4,8],
+		[2,4,6]
+	]
 
+	for (let i = 0; i < winningConditions.length; i++) {
+		let [a,b,c] = winningConditions[i];
+
+		if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+			console.log('Winner is: ', gameBoard[a])
+			return gameBoard[a];
+		}
+	}
 }
 
 generateGameBoard();
