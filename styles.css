@@ -1,0 +1,13 @@
+.game-container {
+  display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	width: 600px;
+	height: 600px;
+
+	border: 1px solid black;
+}
+
+.container-item {
+	border: 1px solid black;
+}
