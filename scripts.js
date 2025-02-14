@@ -54,6 +54,12 @@ function generateGameBoard() {
 			}
 		})
 	}
+
+	const restartButton = document.querySelector('.restart-button');
+
+	restartButton.addEventListener('click', () => {
+		location.reload();
+	})
 };
 
 function checkWinner() {
