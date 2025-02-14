@@ -1,10 +1,6 @@
 let winnerIsKnown = false;
 
-let gameBoard = [
-	[],[],[],
-	[],[],[],
-	[],[],[]
-];
+let gameBoard = ["", "", "", "", "", "", "", "", ""];
 
 const player1 = {
 	name: 'player1',
@@ -58,7 +54,16 @@ function generateGameBoard() {
 	const restartButton = document.querySelector('.restart-button');
 
 	restartButton.addEventListener('click', () => {
-		location.reload();
+		gameBoard.fill('');
+		winnerIsKnown = false;
+		playerTurn = player1.name;
+
+		const turnContainer = document.querySelector('.player-turn');
+    turnContainer.textContent = `Player ${player1.symbol}'s turn`;
+
+    document.querySelectorAll('.container-item').forEach(item => {
+        item.textContent = "";
+    });
 	})
 };
 
@@ -78,7 +83,6 @@ function checkWinner() {
 		let [a,b,c] = winningConditions[i];
 
 		if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-			console.log('Winner is: ', gameBoard[a])
 			winnerIsKnown = true;
 			return gameBoard[a];
 		}
