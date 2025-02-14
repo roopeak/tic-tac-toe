@@ -45,8 +45,9 @@ function generateGameBoard() {
 
 			const winner = checkWinner();
 			
-			if (winner != undefined) {
-				turnContainer.textContent = `Player ${winner} is a winner!`;
+			if (winner) {
+				turnContainer.textContent = winner === 
+				'Tie' ? `It's a tie!` : `Player ${winner} is the winner!`
 			}
 		})
 	}
@@ -85,6 +86,11 @@ function checkWinner() {
 		if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
 			winnerIsKnown = true;
 			return gameBoard[a];
+		}
+
+		if (!gameBoard.includes('')) {
+			winnerIsKnown = true;
+			return 'Tie';
 		}
 	}
 };
