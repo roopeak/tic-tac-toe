@@ -1,10 +1,6 @@
 let winnerIsKnown = false;
 
-let gameBoard = [
-	[],[],[],
-	[],[],[],
-	[],[],[]
-];
+let gameBoard = ["", "", "", "", "", "", "", "", ""];
 
 const player1 = {
 	name: 'player1',
@@ -17,33 +13,58 @@ const player2 = {
 };
 
 function generateGameBoard() {
-	const gameContainer = document.querySelector('.game-container');
 	let playerTurn = player1.name;
+	
+	const turnContainer = document.querySelector('.player-turn');
+	turnContainer.textContent = `Player ${player1.symbol}'s turn`
+	
+	const gameContainer = document.querySelector('.game-container');
 	gameContainer.innerHTML = '';
-
+	
 	for (let i = 0; i < 9; i++) {
 		const containerItem = document.createElement('div');
 		containerItem.classList.add('container-item');
 		gameContainer.appendChild(containerItem);
-
+		
 		containerItem.addEventListener('click', () => {
 			if (containerItem.textContent != '' || winnerIsKnown === true) {
 				return;
 			}
 			
 			if (playerTurn === 'player1') {
+				turnContainer.textContent = `Player ${player2.symbol}'s turn`
 				containerItem.textContent = player1.symbol;
 				gameBoard[i] = player1.symbol;
 				playerTurn = 'player2';
 			} else {
+				turnContainer.textContent = `Player ${player1.symbol}'s turn`
 				containerItem.textContent = player2.symbol;
 				gameBoard[i] = player2.symbol;
 				playerTurn = 'player1';
 			}
 
-			checkWinner();	
+			const winner = checkWinner();
+			
+			if (winner != undefined) {
+				turnContainer.textContent = `Player ${winner} is a winner!`;
+			}
 		})
 	}
+
+	const restartButton = document.querySelector('.restart-button');
+
+	restartButton.addEventListener('click', () => {
+		gameBoard.fill('');
+		winnerIsKnown = false;
+		playerTurn = player1.name;
+
+		const turnContainer = document.querySelector('.player-turn');
+    turnContainer.textContent = `Player ${player1.symbol}'s turn`;
+
+    document.querySelectorAll('.container-item').forEach(item => {
+        item.textContent = "";
+    });
+	})
 };
 
 function checkWinner() {
@@ -62,7 +83,6 @@ function checkWinner() {
 		let [a,b,c] = winningConditions[i];
 
 		if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-			console.log('Winner is: ', gameBoard[a])
 			winnerIsKnown = true;
 			return gameBoard[a];
 		}
