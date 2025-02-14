@@ -5,6 +5,7 @@ body {
 	gap: 30px;
 	margin: 0;
 	padding: 0;
+	font-family: 'Varela Round';
 }
 
 header {
@@ -23,12 +24,16 @@ header {
   display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(3, 1fr);
-	width: 600px;
-	height: 600px;
+	width: 500px;
+	height: 500px;
 
 	border: 1px solid black;
 }
 
 .container-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 80px;
 	border: 1px solid black;
 }
