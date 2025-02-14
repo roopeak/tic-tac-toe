@@ -1,4 +1,4 @@
-const gameContainer = document.querySelector('.game-container');
+let winnerIsKnown = false;
 
 let gameBoard = [
 	[],[],[],
@@ -16,9 +16,9 @@ const player2 = {
 	symbol: 'O'
 };
 
-let playerTurn = player1.name;
-
 function generateGameBoard() {
+	const gameContainer = document.querySelector('.game-container');
+	let playerTurn = player1.name;
 	gameContainer.innerHTML = '';
 
 	for (let i = 0; i < 9; i++) {
@@ -27,7 +27,7 @@ function generateGameBoard() {
 		gameContainer.appendChild(containerItem);
 
 		containerItem.addEventListener('click', () => {
-			if (containerItem.textContent != '') {
+			if (containerItem.textContent != '' || winnerIsKnown === true) {
 				return;
 			}
 			
@@ -35,19 +35,16 @@ function generateGameBoard() {
 				containerItem.textContent = player1.symbol;
 				gameBoard[i] = player1.symbol;
 				playerTurn = 'player2';
-				console.log(gameBoard);
 			} else {
 				containerItem.textContent = player2.symbol;
 				gameBoard[i] = player2.symbol;
 				playerTurn = 'player1';
-				console.log(gameBoard);
 			}
 
-			checkWinner();
-			
+			checkWinner();	
 		})
 	}
-}
+};
 
 function checkWinner() {
 	const winningConditions = [
@@ -66,9 +63,10 @@ function checkWinner() {
 
 		if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
 			console.log('Winner is: ', gameBoard[a])
+			winnerIsKnown = true;
 			return gameBoard[a];
 		}
 	}
-}
+};
 
 generateGameBoard();
