@@ -47,7 +47,11 @@ function generateGameBoard() {
 				playerTurn = 'player1';
 			}
 
-			checkWinner();	
+			const winner = checkWinner();
+			
+			if (winner != undefined) {
+				turnContainer.textContent = `Player ${winner} is a winner!`;
+			}
 		})
 	}
 };
