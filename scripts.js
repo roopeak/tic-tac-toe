@@ -17,25 +17,31 @@ const player2 = {
 };
 
 function generateGameBoard() {
-	const gameContainer = document.querySelector('.game-container');
 	let playerTurn = player1.name;
+	
+	const turnContainer = document.querySelector('.player-turn');
+	turnContainer.textContent = `Player ${player1.symbol}'s turn`
+	
+	const gameContainer = document.querySelector('.game-container');
 	gameContainer.innerHTML = '';
-
+	
 	for (let i = 0; i < 9; i++) {
 		const containerItem = document.createElement('div');
 		containerItem.classList.add('container-item');
 		gameContainer.appendChild(containerItem);
-
+		
 		containerItem.addEventListener('click', () => {
 			if (containerItem.textContent != '' || winnerIsKnown === true) {
 				return;
 			}
 			
 			if (playerTurn === 'player1') {
+				turnContainer.textContent = `Player ${player2.symbol}'s turn`
 				containerItem.textContent = player1.symbol;
 				gameBoard[i] = player1.symbol;
 				playerTurn = 'player2';
 			} else {
+				turnContainer.textContent = `Player ${player1.symbol}'s turn`
 				containerItem.textContent = player2.symbol;
 				gameBoard[i] = player2.symbol;
 				playerTurn = 'player1';

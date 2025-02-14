@@ -21,6 +21,10 @@ header {
 	height: 150px;
 }
 
+.player-turn {
+	font-size: 40px;
+}
+
 .game-container {
   display: grid;
 	grid-template-columns: repeat(3, 1fr);
