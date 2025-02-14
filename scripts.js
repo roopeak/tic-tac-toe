@@ -12,6 +12,7 @@ const player2 = {
 	symbol: 'O'
 };
 
+// Generates the gameboard and runs the game
 function generateGameBoard() {
 	let playerTurn = player1.name;
 	
@@ -52,22 +53,11 @@ function generateGameBoard() {
 		})
 	}
 
-	const restartButton = document.querySelector('.restart-button');
-
-	restartButton.addEventListener('click', () => {
-		gameBoard.fill('');
-		winnerIsKnown = false;
-		playerTurn = player1.name;
-
-		const turnContainer = document.querySelector('.player-turn');
-    turnContainer.textContent = `Player ${player1.symbol}'s turn`;
-
-    document.querySelectorAll('.container-item').forEach(item => {
-        item.textContent = "";
-    });
-	})
+	document.querySelector('.restart-button')
+		.addEventListener('click', resetGame);
 };
 
+// Checks the game status
 function checkWinner() {
 	const winningConditions = [
 		[0,1,2],
@@ -87,12 +77,26 @@ function checkWinner() {
 			winnerIsKnown = true;
 			return gameBoard[a];
 		}
+	}
 
-		if (!gameBoard.includes('')) {
-			winnerIsKnown = true;
-			return 'Tie';
-		}
+	if (!gameBoard.includes('')) {
+		winnerIsKnown = true;
+		return 'Tie';
 	}
 };
+
+// Resets the game
+function resetGame() {
+	gameBoard.fill('');
+	winnerIsKnown = false;
+	playerTurn = 'player1';
+
+	const turnContainer = document.querySelector('.player-turn');
+	turnContainer.textContent = `Player ${player1.symbol}'s turn`;
+
+	document.querySelectorAll('.container-item').forEach(item => {
+			item.textContent = "";
+	});
+}
 
 generateGameBoard();
